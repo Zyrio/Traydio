@@ -69,7 +69,7 @@
             // 
             this.OpenStationsTrayItem.Name = "OpenStationsTrayItem";
             this.OpenStationsTrayItem.Size = new System.Drawing.Size(155, 22);
-            this.OpenStationsTrayItem.Text = "Open Stations";
+            this.OpenStationsTrayItem.Text = "Edit Stations";
             this.OpenStationsTrayItem.Click += new System.EventHandler(this.OpenStationsTrayItem_Click);
             // 
             // ReloadStationsTrayItem
