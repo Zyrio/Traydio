@@ -70,15 +70,38 @@ namespace Traydio.Windows
         }
 
         /// <summary>
-        /// (Tray) -> About
+        /// (Tray) -> About -> GitHub
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AboutTrayItem_Click(object sender, EventArgs e)
+        private void GitHubTrayItem_Click(object sender, EventArgs e)
+        {
+            ProcessStartInfo processStartInfo = new ProcessStartInfo("https://github.com/electricduck/Traydio");
+            Process.Start(processStartInfo);
+        }
+
+        /// <summary>
+        /// (Tray) -> About -> Website
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WebsiteTrayItem_Click(object sender, EventArgs e)
+        {
+            ProcessStartInfo processStartInfo = new ProcessStartInfo("https://ducky.ws/traydio");
+            Process.Start(processStartInfo);
+        }
+
+        /// <summary>
+        /// (Tray) -> About -> About Traydio
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AboutTraydioTrayItem_Click(object sender, EventArgs e)
         {
             var aboutWindow = new About();
 
-            if(Application.OpenForms.OfType<About>().Count() == 0) {
+            if (Application.OpenForms.OfType<About>().Count() == 0)
+            {
                 aboutWindow.Show();
             }
         }
@@ -198,6 +221,5 @@ namespace Traydio.Windows
                 }
             }
         }
-
     }
 }

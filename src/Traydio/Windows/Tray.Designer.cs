@@ -49,6 +49,10 @@
             this.WindowsMediaPlayerTrayItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Seperator1TrayItem = new System.Windows.Forms.ToolStripSeparator();
             this.AboutTrayItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AboutTraydioTrayItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Separator5TrayItem = new System.Windows.Forms.ToolStripSeparator();
+            this.WebsiteTrayItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GitHubTrayItem = new System.Windows.Forms.ToolStripMenuItem();
             this.QuitTrayItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             StationsTrayItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,7 +104,7 @@
             this.QuitTrayItem});
             this.TrayMenu.Name = "TrayMenu";
             this.TrayMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.TrayMenu.Size = new System.Drawing.Size(170, 154);
+            this.TrayMenu.Size = new System.Drawing.Size(170, 176);
             // 
             // NowPlayingTrayItem
             // 
@@ -198,10 +202,40 @@
             // 
             // AboutTrayItem
             // 
+            this.AboutTrayItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutTraydioTrayItem,
+            this.Separator5TrayItem,
+            this.WebsiteTrayItem,
+            this.GitHubTrayItem});
             this.AboutTrayItem.Name = "AboutTrayItem";
             this.AboutTrayItem.Size = new System.Drawing.Size(169, 22);
             this.AboutTrayItem.Text = "About";
-            this.AboutTrayItem.Click += new System.EventHandler(this.AboutTrayItem_Click);
+            // 
+            // AboutTraydioTrayItem
+            // 
+            this.AboutTraydioTrayItem.Name = "AboutTraydioTrayItem";
+            this.AboutTraydioTrayItem.Size = new System.Drawing.Size(152, 22);
+            this.AboutTraydioTrayItem.Text = "About Traydio";
+            this.AboutTraydioTrayItem.Click += new System.EventHandler(this.AboutTraydioTrayItem_Click);
+            // 
+            // Separator5TrayItem
+            // 
+            this.Separator5TrayItem.Name = "Separator5TrayItem";
+            this.Separator5TrayItem.Size = new System.Drawing.Size(149, 6);
+            // 
+            // WebsiteTrayItem
+            // 
+            this.WebsiteTrayItem.Name = "WebsiteTrayItem";
+            this.WebsiteTrayItem.Size = new System.Drawing.Size(152, 22);
+            this.WebsiteTrayItem.Text = "Website";
+            this.WebsiteTrayItem.Click += new System.EventHandler(this.WebsiteTrayItem_Click);
+            // 
+            // GitHubTrayItem
+            // 
+            this.GitHubTrayItem.Name = "GitHubTrayItem";
+            this.GitHubTrayItem.Size = new System.Drawing.Size(152, 22);
+            this.GitHubTrayItem.Text = "GitHub";
+            this.GitHubTrayItem.Click += new System.EventHandler(this.GitHubTrayItem_Click);
             // 
             // QuitTrayItem
             // 
@@ -260,6 +294,10 @@
         private System.Windows.Forms.ToolStripMenuItem EngineTrayItem;
         private System.Windows.Forms.ToolStripMenuItem WindowsMediaPlayerTrayItem;
         private System.Windows.Forms.ToolStripMenuItem MpdTrayItem;
+        private System.Windows.Forms.ToolStripMenuItem AboutTraydioTrayItem;
+        private System.Windows.Forms.ToolStripSeparator Separator5TrayItem;
+        private System.Windows.Forms.ToolStripMenuItem WebsiteTrayItem;
+        private System.Windows.Forms.ToolStripMenuItem GitHubTrayItem;
     }
 }
 
