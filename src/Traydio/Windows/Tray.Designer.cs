@@ -219,7 +219,6 @@
             this.MediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MediaPlayer.OcxState")));
             this.MediaPlayer.Size = new System.Drawing.Size(520, 357);
             this.MediaPlayer.TabIndex = 2;
-            this.MediaPlayer.Enter += new System.EventHandler(this.MediaPlayer_Enter);
             // 
             // Tray
             // 

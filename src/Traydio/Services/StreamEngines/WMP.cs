@@ -3,8 +3,9 @@ using System.Net;
 using AxWMPLib;
 using IniParser;
 using IniParser.Model;
+using Traydio.Data.Enums;
 
-namespace Traydio.StreamEngines
+namespace Traydio.Services.StreamEngines
 {
     public class WMP
     {
@@ -32,19 +33,19 @@ namespace Traydio.StreamEngines
             }
         }
 
-        public void ControlAudio(Enums.AudioControl control, AxWindowsMediaPlayer mediaPlayer)
+        public void ControlAudio(AudioControlEnum control, AxWindowsMediaPlayer mediaPlayer)
         {
             switch(control) {
-                case (Enums.AudioControl.Play):
+                case (AudioControlEnum.Play):
                     mediaPlayer.Ctlcontrols.play();
                     break;
-                case (Enums.AudioControl.Stop):
+                case (AudioControlEnum.Stop):
                     mediaPlayer.Ctlcontrols.stop();
                     break;
-                case (Enums.AudioControl.Pause):
+                case (AudioControlEnum.Pause):
                     mediaPlayer.Ctlcontrols.pause();
                     break;
-                case (Enums.AudioControl.Reload):
+                case (AudioControlEnum.Reload):
                     mediaPlayer.Ctlcontrols.stop();
                     mediaPlayer.Ctlcontrols.play();
                     break;

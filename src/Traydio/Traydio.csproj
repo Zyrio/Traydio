@@ -73,9 +73,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums.cs" />
-    <Compile Include="Stations.cs" />
-    <Compile Include="StreamEngines\WMP.cs" />
+    <Compile Include="Data\Enums\AudioControlEnum.cs" />
+    <Compile Include="Services\Stations.cs" />
+    <Compile Include="Services\StreamEngines\WMP.cs" />
     <Compile Include="Windows\About.cs">
       <SubType>Form</SubType>
     </Compile>
