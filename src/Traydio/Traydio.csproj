@@ -73,9 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Constants\Default.cs" />
     <Compile Include="Data\Constants\Settings.cs" />
     <Compile Include="Data\Enums\AudioControlEnum.cs" />
     <Compile Include="Data\Enums\StreamEngineEnum.cs" />
+    <Compile Include="Services\DefaultSettings.cs" />
     <Compile Include="Services\Stations.cs" />
     <Compile Include="Services\StreamEngines\WMP.cs" />
     <Compile Include="Windows\About.cs">

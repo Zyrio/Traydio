@@ -22,12 +22,12 @@ namespace Traydio.Windows
 
         private void Tray_Load(object sender, EventArgs e)
         {
+            DefaultSettings defaultSettingsService = new DefaultSettings();
+
             _appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             _configPath = Path.Combine(_appDataPath, "Traydio");
 
-            if (!Directory.Exists(_configPath))
-                Directory.CreateDirectory(_configPath);
-
+            defaultSettingsService.LoadDefaultSettings(_configPath);
             ReloadStationsMenu();
 
             this.ShowInTaskbar = false;
@@ -55,6 +55,7 @@ namespace Traydio.Windows
                 wmp.StreamAudio(url, MediaPlayer);
 
                 NowPlayingTrayItem.Text = name;
+                TrayIcon.Text = "Traydio: " + name;
             }
         }
 
@@ -128,9 +129,9 @@ namespace Traydio.Windows
         /// <param name="e"></param>
         private void ReloadTrayItem_Click(object sender, EventArgs e)
         {
-            var wmp = new WMP();
+            WMP wmpStreamEngine = new WMP();
 
-            wmp.ControlAudio(AudioControlEnum.Reload, MediaPlayer);
+            wmpStreamEngine.ControlAudio(AudioControlEnum.Reload, MediaPlayer);
         }
 
         /// <summary>
@@ -140,9 +141,11 @@ namespace Traydio.Windows
         /// <param name="e"></param>
         private void StopTrayItem_Click(object sender, EventArgs e)
         {
-            var wmp = new WMP();
+            WMP wmpStreamEngine = new WMP();
 
-            wmp.ControlAudio(AudioControlEnum.Stop, MediaPlayer);
+            wmpStreamEngine.ControlAudio(AudioControlEnum.Stop, MediaPlayer);
+
+            TrayIcon.Text = "Traydio";
         }
 
         /// <summary>
@@ -152,16 +155,16 @@ namespace Traydio.Windows
         /// <param name="e"></param>
         private void PlayTrayItem_Click(object sender, EventArgs e)
         {
-            var wmp =  new WMP();
+            WMP wmpStreamEngine = new WMP();
 
-            wmp.ControlAudio(AudioControlEnum.Play, MediaPlayer);
+            wmpStreamEngine.ControlAudio(AudioControlEnum.Play, MediaPlayer);
         }
 
         private void ReloadStationsMenu()
         {
-            Stations _stations = new Stations();
+            Stations stationsService = new Stations();
 
-            var reloadStationsSuccess = _stations.ReloadStations(TrayMenu, Path.Combine(_configPath, "stations.xml"));
+            var reloadStationsSuccess = stationsService.ReloadStations(TrayMenu, Path.Combine(_configPath, "stations.xml"));
             if (reloadStationsSuccess)
             {
                 foreach (var item in TrayMenu.Items)
