@@ -17,8 +17,8 @@ namespace Traydio.Services.StreamEngines
             {
                 if (url.Contains(".pls"))
                 {
-                    WebClient wc = new WebClient();
-                    using (MemoryStream stream = new MemoryStream(wc.DownloadData(url)))
+                    WebClient webClient = new WebClient();
+                    using (MemoryStream stream = new MemoryStream(webClient.DownloadData(url)))
                     {
                         var parser = new FileIniDataParser();
                         StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8, true);
@@ -42,7 +42,7 @@ namespace Traydio.Services.StreamEngines
                 if (errorResponse.StatusCode == HttpStatusCode.NotFound)
                 {
                     var errorMessage = string.Format("404: Not Found{0}---{1}Stream '{2}' cannot be found",
-                    Environment.NewLine, Environment.NewLine, url);
+                        Environment.NewLine, Environment.NewLine, url);
 
                     MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } else

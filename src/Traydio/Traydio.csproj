@@ -73,11 +73,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Constants\Default.cs" />
-    <Compile Include="Data\Constants\Settings.cs" />
+    <Compile Include="Data\Constants\DefaultConstant.cs" />
+    <Compile Include="Data\Constants\SettingsConstant.cs" />
     <Compile Include="Data\Enums\AudioControlEnum.cs" />
     <Compile Include="Data\Enums\StreamEngineEnum.cs" />
+    <Compile Include="Data\Models\AutoUpdateModel.cs" />
     <Compile Include="Services\DefaultSettings.cs" />
+    <Compile Include="Services\AutoUpdate.cs" />
     <Compile Include="Services\Stations.cs" />
     <Compile Include="Services\StreamEngines\WMP.cs" />
     <Compile Include="Utilities.cs" />

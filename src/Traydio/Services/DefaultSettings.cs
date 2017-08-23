@@ -8,7 +8,7 @@ namespace Traydio.Services
     {
         public void LoadDefaultSettings(string path)
         {
-            Default defaultData = new Default();
+            DefaultConstant defaultData = new DefaultConstant();
 
             // var applicationSettingsPath = Path.Combine(path, "settings.ini");
             var stationsSettingsPath = Path.Combine(path, "stations.xml");

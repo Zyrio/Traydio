@@ -1,7 +1,7 @@
 ﻿
 namespace Traydio.Data.Constants
 {
-    class Default
+    class DefaultConstant
     {
         public string Stations { get; set; } = @"<bookmarks>
     <group name=""root"">

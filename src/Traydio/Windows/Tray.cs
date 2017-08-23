@@ -27,6 +27,8 @@ namespace Traydio.Windows
             _appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             _configPath = Path.Combine(_appDataPath, "Traydio");
 
+            CheckUpdate();
+
             defaultSettingsService.LoadDefaultSettings(_configPath);
             ReloadStationsMenu();
 
@@ -89,6 +91,11 @@ namespace Traydio.Windows
         {
             ProcessStartInfo processStartInfo = new ProcessStartInfo("https://ducky.ws/traydio");
             Process.Start(processStartInfo);
+        }
+
+        private void CheckForUpdateTrayItem_Click(object sender, EventArgs e)
+        {
+            CheckUpdate();
         }
 
         /// <summary>
@@ -181,6 +188,25 @@ namespace Traydio.Windows
             WMP wmpStreamEngine = new WMP();
 
             wmpStreamEngine.ControlAudio(AudioControlEnum.Play, MediaPlayer);
+        }
+
+        public void CheckUpdate()
+        {
+            AutoUpdate autoUpdateService = new AutoUpdate();
+
+            var checkUpdate = autoUpdateService.CheckUpdate();
+
+            if (checkUpdate.IsUpdateAvailable)
+            {
+                var updateMessage = string.Format("Update available for Traydio!{0}You are on version {1}; the latest version is {2}.{3}{4}Do you want to download the latest version?",
+                    Environment.NewLine, checkUpdate.CurrentVersion, checkUpdate.NewVersion, Environment.NewLine, Environment.NewLine);
+
+                if (MessageBox.Show(updateMessage, "Update Traydio", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                {
+                    ProcessStartInfo processStartInfo = new ProcessStartInfo(checkUpdate.Url);
+                    Process.Start(processStartInfo);
+                }
+            }
         }
 
         private void ReloadStationsMenu()

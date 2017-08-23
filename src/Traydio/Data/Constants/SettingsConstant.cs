@@ -2,7 +2,7 @@
 
 namespace Traydio.Data.Constants
 {
-    class Settings
+    class SettingsConstant
     {
         StreamEngineEnum StreamEngine { get; set; } = StreamEngineEnum.WindowsMediaPlayer;
     }
