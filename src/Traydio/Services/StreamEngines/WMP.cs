@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
+using System.Windows.Forms;
 using AxWMPLib;
 using IniParser;
 using IniParser.Model;
@@ -11,25 +13,44 @@ namespace Traydio.Services.StreamEngines
     {
         public void StreamAudio(string url, AxWindowsMediaPlayer mediaPlayer)
         {
-            if(url.Contains(".pls"))
+            try
             {
-                WebClient wc = new WebClient();
-                using (MemoryStream stream = new MemoryStream(wc.DownloadData(url)))
+                if (url.Contains(".pls"))
                 {
-                    var parser = new FileIniDataParser();
-                    StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8, true);
+                    WebClient wc = new WebClient();
+                    using (MemoryStream stream = new MemoryStream(wc.DownloadData(url)))
+                    {
+                        var parser = new FileIniDataParser();
+                        StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8, true);
 
-                    IniData data = parser.ReadData(reader);
+                        IniData data = parser.ReadData(reader);
 
-                    var recoveredUrl = data["playlist"]["File1"];
+                        var recoveredUrl = data["playlist"]["File1"];
 
-                    mediaPlayer.URL = recoveredUrl;
+                        mediaPlayer.URL = recoveredUrl;
+                        mediaPlayer.Ctlcontrols.play();
+                    }
+                }
+                else
+                {
+                    mediaPlayer.URL = url;
                     mediaPlayer.Ctlcontrols.play();
                 }
-            } else
+            } catch(WebException webException)
             {
-                mediaPlayer.URL = url;
-                mediaPlayer.Ctlcontrols.play();
+                HttpWebResponse errorResponse = webException.Response as HttpWebResponse;
+                if (errorResponse.StatusCode == HttpStatusCode.NotFound)
+                {
+                    var errorMessage = string.Format("404: Not Found{0}---{1}Stream '{2}' cannot be found",
+                    Environment.NewLine, Environment.NewLine, url);
+
+                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else
+                {
+                    var errorMessage = string.Format("Unknown Error");
+
+                    MessageBox.Show(errorMessage, "Unknown Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
