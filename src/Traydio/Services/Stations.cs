@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -17,13 +19,28 @@ namespace Traydio.Services
 
         private void LoadDynamicMenu(ContextMenuStrip menuStrip, string xmlPath)
         {
-            XmlTextReader reader = new XmlTextReader(xmlPath);
+            MemoryStream xmlStream = CompatibalizeConfig(xmlPath);
+
+            XmlTextReader reader = new XmlTextReader(xmlStream);
             LoadDynamicMenu(menuStrip, reader);
+        }
+
+        private MemoryStream CompatibalizeConfig(string path)
+        {
+            var content = File.ReadAllText(path);
+
+            var updatedContent = Utilities.ReplaceLastOccurrence(content, "</group>", "");
+            updatedContent = updatedContent.Replace("<group name=\"root\">", "");
+
+            MemoryStream contentStream = Utilities.GenerateStreamFromString(updatedContent, Encoding.Unicode);
+
+            return contentStream;
         }
 
         private void LoadDynamicMenu(ContextMenuStrip menuStrip, XmlTextReader xmlReader)
         {
             XmlDocument document = new XmlDocument();
+
             document.Load(xmlReader);
 
             XmlElement element = document.DocumentElement;

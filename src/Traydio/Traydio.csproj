@@ -80,6 +80,7 @@
     <Compile Include="Services\DefaultSettings.cs" />
     <Compile Include="Services\Stations.cs" />
     <Compile Include="Services\StreamEngines\WMP.cs" />
+    <Compile Include="Utilities.cs" />
     <Compile Include="Windows\About.cs">
       <SubType>Form</SubType>
     </Compile>
