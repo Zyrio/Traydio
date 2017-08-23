@@ -39,8 +39,7 @@ namespace Traydio.Services
         {
             var content = File.ReadAllText(path);
 
-            var updatedContent = Utilities.ReplaceLastOccurrence(content, "</group>", "</group>");
-            updatedContent = updatedContent.Replace("<group name=\"root\">", "<group name=\"Streams\">");
+            var updatedContent = content.Replace("<group name=\"root\">", "<group name=\"Streams\">");
 
             MemoryStream contentStream = Utilities.GenerateStreamFromString(updatedContent, Encoding.Unicode);
 
@@ -55,6 +54,18 @@ namespace Traydio.Services
                 document.Load(xmlReader);
 
                 XmlElement element = document.DocumentElement;
+
+                var mainGroup = document.FirstChild.FirstChild;
+                if(mainGroup.Attributes["name"].Value != "Streams")
+                {
+                    throw new XmlException();
+                }
+
+                var outerGroup = document.FirstChild.ChildNodes.Count;
+                if(outerGroup > 1)
+                {
+                    throw new XmlException();
+                }
 
                 menuStrip.Items.RemoveAt(2);
 
