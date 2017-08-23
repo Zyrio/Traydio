@@ -10,11 +10,15 @@ namespace Traydio.Services
     {
         public bool ReloadStations(ContextMenuStrip menuStrip, string file)
         {
-            menuStrip.Items.RemoveAt(2);
-
-            LoadDynamicMenu(menuStrip, file);
-
-            return true;
+            try
+            {
+                LoadDynamicMenu(menuStrip, file);
+                return true;
+            } catch(XmlException)
+            {
+                MessageBox.Show("Unable to process stations XML", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
 
         private void LoadDynamicMenu(ContextMenuStrip menuStrip, string xmlPath)
@@ -22,15 +26,21 @@ namespace Traydio.Services
             MemoryStream xmlStream = CompatibalizeConfig(xmlPath);
 
             XmlTextReader reader = new XmlTextReader(xmlStream);
-            LoadDynamicMenu(menuStrip, reader);
+
+            try {
+                LoadDynamicMenu(menuStrip, reader);
+            } catch(XmlException)
+            {
+                throw new XmlException();
+            }
         }
 
         private MemoryStream CompatibalizeConfig(string path)
         {
             var content = File.ReadAllText(path);
 
-            var updatedContent = Utilities.ReplaceLastOccurrence(content, "</group>", "");
-            updatedContent = updatedContent.Replace("<group name=\"root\">", "");
+            var updatedContent = Utilities.ReplaceLastOccurrence(content, "</group>", "</group>");
+            updatedContent = updatedContent.Replace("<group name=\"root\">", "<group name=\"Streams\">");
 
             MemoryStream contentStream = Utilities.GenerateStreamFromString(updatedContent, Encoding.Unicode);
 
@@ -41,38 +51,53 @@ namespace Traydio.Services
         {
             XmlDocument document = new XmlDocument();
 
-            document.Load(xmlReader);
+            try { 
+                document.Load(xmlReader);
 
-            XmlElement element = document.DocumentElement;
+                XmlElement element = document.DocumentElement;
 
-            foreach (XmlNode node in document.FirstChild.ChildNodes)
-            {
-                ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                menuStrip.Items.RemoveAt(2);
 
-                var menuItemName = Guid.NewGuid().ToString().Replace("-", "");
-
-                menuItem.Name = menuItemName;
-                menuItem.Text = node.Attributes["name"].Value;
-                if (node.Attributes["url"] != null)
+                foreach (XmlNode node in document.FirstChild.ChildNodes)
                 {
-                    menuItem.ToolTipText = node.Attributes["url"].Value;
-                }
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem();
 
-                menuStrip.Items.Insert(2, menuItem);
-                GenerateMenusFromXML(node, (ToolStripMenuItem)menuStrip.Items[2], menuItemName);
+                    var menuItemName = Guid.NewGuid().ToString().Replace("-", "");
+
+                    if (node.Attributes["name"].Value.StartsWith("[separator"))
+                    {
+                        ToolStripSeparator separator = new ToolStripSeparator();
+
+                        menuItem.DropDownItems.Add(separator);
+                    }
+                    else
+                    {
+                        menuItem.Name = menuItemName;
+                        menuItem.Text = node.Attributes["name"].Value;
+                        if (node.Attributes["url"] != null)
+                        {
+                            menuItem.ToolTipText = node.Attributes["url"].Value;
+                        }
+                    }
+
+                    menuStrip.Items.Insert(2, menuItem);
+                    GenerateMenusFromXML(node, (ToolStripMenuItem)menuStrip.Items[2], menuItemName);
+                }
+            } catch (XmlException)
+            {
+                throw new XmlException();
             }
         }
 
         private void GenerateMenusFromXML(XmlNode rootNode, ToolStripMenuItem menuItem, string menuItemName)
         {
             ToolStripItem item = null;
-            ToolStripSeparator separator = null;
 
             foreach (XmlNode node in rootNode.ChildNodes)
             {
                 if (node.Attributes["name"].Value.StartsWith("[separator"))
                 {
-                    separator = new ToolStripSeparator();
+                    ToolStripSeparator separator = new ToolStripSeparator();
 
                     menuItem.DropDownItems.Add(separator);
                 }

@@ -49,7 +49,7 @@ namespace Traydio.Services.StreamEngines
                 {
                     var errorMessage = string.Format("Unknown Error");
 
-                    MessageBox.Show(errorMessage, "Unknown Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
