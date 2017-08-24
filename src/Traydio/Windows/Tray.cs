@@ -16,9 +16,12 @@ namespace Traydio.Windows
         public string _appDataPath { get; set; }
         public string _configPath { get; set; }
         public SettingsModel _settings { get; set; }
+        public Utilities _utilities { get; set; }
 
         public Tray()
         {
+            _utilities = new Utilities();
+
             InitializeComponent();
         }
 
@@ -87,8 +90,7 @@ namespace Traydio.Windows
         /// <param name="e"></param>
         private void GitHubTrayItem_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo processStartInfo = new ProcessStartInfo("https://github.com/electricduck/Traydio");
-            Process.Start(processStartInfo);
+            _utilities.OpenWebsite("https://github.com/electricduck/Traydio");
         }
 
         /// <summary>
@@ -98,8 +100,7 @@ namespace Traydio.Windows
         /// <param name="e"></param>
         private void WebsiteTrayItem_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo processStartInfo = new ProcessStartInfo("https://ducky.ws/traydio");
-            Process.Start(processStartInfo);
+            _utilities.OpenWebsite("https://ducky.ws/traydio");
         }
 
         private void CheckForUpdateTrayItem_Click(object sender, EventArgs e)
@@ -141,8 +142,7 @@ namespace Traydio.Windows
         {
             var stationsPath = Path.Combine(_configPath, "stations.xml");
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(stationsPath);
-            Process.Start(processStartInfo);
+            _utilities.OpenFile(stationsPath);
         }
 
         /// <summary>
@@ -212,8 +212,7 @@ namespace Traydio.Windows
 
                 if (MessageBox.Show(updateMessage, "Update Traydio", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
                 {
-                    ProcessStartInfo processStartInfo = new ProcessStartInfo(checkUpdate.Url);
-                    Process.Start(processStartInfo);
+                    _utilities.OpenWebsite(checkUpdate.Url);
                 }
             }
         }

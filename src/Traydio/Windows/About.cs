@@ -8,8 +8,12 @@ namespace Traydio.Windows
 {
     partial class About : Form
     {
+        public Utilities _utilities { get; set; }
+
         public About()
         {
+            _utilities = new Utilities();
+
             InitializeComponent();
 
             var version = AssemblyVersion.Substring(0, AssemblyVersion.LastIndexOf("."));
@@ -123,8 +127,7 @@ namespace Traydio.Windows
         {
             if (AssemblyCompany.StartsWith("http"))
             {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo(AssemblyCompany);
-                Process.Start(processStartInfo);
+                _utilities.OpenWebsite(AssemblyCompany);
             }
         }
     }
