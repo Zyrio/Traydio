@@ -3,6 +3,9 @@ namespace Traydio.Data.Constants
 {
     class DefaultConstant
     {
+        public string Application { get; set; } = @"[Settings]
+CheckForUpdate=true";
+
         public string Stations { get; set; } = @"<bookmarks>
     <group name=""root"">
         <group name=""Example Group"">

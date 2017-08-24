@@ -5,6 +5,7 @@ using System.Linq;
 using System.IO;
 using System.Windows.Forms;
 using Traydio.Data.Enums;
+using Traydio.Data.Models;
 using Traydio.Services;
 using Traydio.Services.StreamEngines;
 
@@ -14,6 +15,7 @@ namespace Traydio.Windows
     {
         public string _appDataPath { get; set; }
         public string _configPath { get; set; }
+        public SettingsModel _settings { get; set; }
 
         public Tray()
         {
@@ -22,15 +24,22 @@ namespace Traydio.Windows
 
         private void Tray_Load(object sender, EventArgs e)
         {
-            DefaultSettings defaultSettingsService = new DefaultSettings();
+            Settings settingsService = new Settings();
 
             _appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             _configPath = Path.Combine(_appDataPath, "Traydio");
 
-            CheckUpdate();
+            var settingsPath = Path.Combine(_configPath, "Settings.ini");
 
-            defaultSettingsService.LoadDefaultSettings(_configPath);
+            settingsService.LoadDefaultSettings(_configPath);
+            _settings = settingsService.LoadSettings(settingsPath);
+
             ReloadStationsMenu();
+
+            if (_settings.CheckForUpdate)
+            {
+                CheckUpdate();
+            }
 
             this.ShowInTaskbar = false;
             WindowState = FormWindowState.Minimized;
