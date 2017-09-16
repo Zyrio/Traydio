@@ -106,8 +106,8 @@
             this.QuitTrayItem});
             this.TrayMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TrayMenu.Name = "TrayMenu";
-            this.TrayMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.TrayMenu.Size = new System.Drawing.Size(170, 154);
+            this.TrayMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.TrayMenu.Size = new System.Drawing.Size(170, 176);
             // 
             // NowPlayingTrayItem
             // 
