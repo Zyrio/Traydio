@@ -51,12 +51,12 @@
             this.AboutTrayItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutTraydioTrayItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Separator5TrayItem = new System.Windows.Forms.ToolStripSeparator();
+            this.CheckForUpdateTrayItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Separator6TrayItem = new System.Windows.Forms.ToolStripSeparator();
             this.WebsiteTrayItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GitHubTrayItem = new System.Windows.Forms.ToolStripMenuItem();
             this.QuitTrayItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.CheckForUpdateTrayItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Separator6TrayItem = new System.Windows.Forms.ToolStripSeparator();
             StationsTrayItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TrayMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MediaPlayer)).BeginInit();
@@ -104,9 +104,10 @@
             this.Seperator1TrayItem,
             this.AboutTrayItem,
             this.QuitTrayItem});
+            this.TrayMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TrayMenu.Name = "TrayMenu";
-            this.TrayMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.TrayMenu.Size = new System.Drawing.Size(170, 176);
+            this.TrayMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.TrayMenu.Size = new System.Drawing.Size(170, 154);
             // 
             // NowPlayingTrayItem
             // 
@@ -227,6 +228,18 @@
             this.Separator5TrayItem.Name = "Separator5TrayItem";
             this.Separator5TrayItem.Size = new System.Drawing.Size(163, 6);
             // 
+            // CheckForUpdateTrayItem
+            // 
+            this.CheckForUpdateTrayItem.Name = "CheckForUpdateTrayItem";
+            this.CheckForUpdateTrayItem.Size = new System.Drawing.Size(166, 22);
+            this.CheckForUpdateTrayItem.Text = "Check for Update";
+            this.CheckForUpdateTrayItem.Click += new System.EventHandler(this.CheckForUpdateTrayItem_Click);
+            // 
+            // Separator6TrayItem
+            // 
+            this.Separator6TrayItem.Name = "Separator6TrayItem";
+            this.Separator6TrayItem.Size = new System.Drawing.Size(163, 6);
+            // 
             // WebsiteTrayItem
             // 
             this.WebsiteTrayItem.Name = "WebsiteTrayItem";
@@ -257,18 +270,6 @@
             this.MediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MediaPlayer.OcxState")));
             this.MediaPlayer.Size = new System.Drawing.Size(520, 357);
             this.MediaPlayer.TabIndex = 2;
-            // 
-            // CheckForUpdateTrayItem
-            // 
-            this.CheckForUpdateTrayItem.Name = "CheckForUpdateTrayItem";
-            this.CheckForUpdateTrayItem.Size = new System.Drawing.Size(166, 22);
-            this.CheckForUpdateTrayItem.Text = "Check for Update";
-            this.CheckForUpdateTrayItem.Click += new System.EventHandler(this.CheckForUpdateTrayItem_Click);
-            // 
-            // Separator6TrayItem
-            // 
-            this.Separator6TrayItem.Name = "Separator6TrayItem";
-            this.Separator6TrayItem.Size = new System.Drawing.Size(163, 6);
             // 
             // Tray
             // 

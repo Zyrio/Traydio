@@ -90,7 +90,7 @@ namespace Traydio.Windows
         /// <param name="e"></param>
         private void GitHubTrayItem_Click(object sender, EventArgs e)
         {
-            _utilities.OpenWebsite("https://github.com/electricduck/Traydio");
+            _utilities.OpenWebsite("https://github.com/zyrio/traydio");
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Traydio.Windows
         /// <param name="e"></param>
         private void WebsiteTrayItem_Click(object sender, EventArgs e)
         {
-            _utilities.OpenWebsite("https://ducky.ws/traydio");
+            _utilities.OpenWebsite("https://zyr.io/traydio");
         }
 
         private void CheckForUpdateTrayItem_Click(object sender, EventArgs e)
