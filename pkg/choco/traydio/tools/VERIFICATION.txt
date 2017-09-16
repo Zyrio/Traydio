@@ -1,0 +1,5 @@
+﻿VERIFICATION
+Verification is intended to assist the Chocolatey moderators and community
+in verifying that this package's contents are trustworthy.
+
+https://get.zyr.io/dist/Traydio/Win32/0.3.0/x86/Traydio-Win32-0.3.0-x86.install.exe MD5 5bb46003227630459c9bccd750130f5c
